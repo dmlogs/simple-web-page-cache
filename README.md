@@ -74,9 +74,7 @@ WADL Definition is provided after start up via /application.wadl
 
 ## Authentication
 
-If authentication is enabled the service will filter requests to assert any request not to the "application.wadl" path is authorized.
-
-Authentication expects a basic authorization header containing "[user]:[password]" Base64 encoded.
+If authentication is enabled a basic authorization header is expected.
 
 Example:
 ```
