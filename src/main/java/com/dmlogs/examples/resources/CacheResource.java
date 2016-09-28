@@ -6,7 +6,6 @@ import org.apache.commons.validator.routines.UrlValidator;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.net.UnknownHostException;
 import java.util.UUID;
 
 /**
@@ -20,7 +19,6 @@ public class CacheResource {
 
     private String[] urlSchemes = {"http", "https"};
     private UrlValidator validator = new UrlValidator(urlSchemes);
-
 
     private final static String cacheStatsTemplate = "<!DOCTYPE html><html>" +
             "<head><title>simple-web-page-cache</title></head>" +
@@ -37,6 +35,7 @@ public class CacheResource {
     private final static String unknownHostMessageTemplate = "The url \"%s\" was validated successfully but the server could not reach the host.";
 
     /**
+     * Retrieve web page containing simple cache statistics.
      *
      * @return Listing of simple cache statistics
      */
@@ -47,8 +46,12 @@ public class CacheResource {
     }
 
     /**
+     * Expects valid url.
+     *  Retrieves web page and stores headers and body to cache.
+     *  Returns ID for future reference.
      *
-     * @return Unique identifier as string returned as tet/plain response.
+     * @param url Valid url for web page to cache.
+     * @return Unique identifier as string returned as text/plain response.
      */
     @POST
     @Produces(MediaType.TEXT_PLAIN)
@@ -103,5 +106,4 @@ public class CacheResource {
 
         return Response.status(404).entity(String.format(notFoundInCacheMessageTemplate,id)).build();
     }
-
 }

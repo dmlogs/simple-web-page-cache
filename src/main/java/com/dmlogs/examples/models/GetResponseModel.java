@@ -35,6 +35,13 @@ public class GetResponseModel extends CacheItemModel {
         return Response.ok(body).replaceAll(headers).build();
     }
 
+    /**
+     * Retrieve provided web page and build a GetResponseModel object for storage in the cache.
+     *
+     * @param url
+     * @return GetResponseModel
+     * @throws ProcessingException
+     */
     public static GetResponseModel create(String url) throws ProcessingException {
         JerseyClient client = JerseyClientBuilder.createClient();
         JerseyWebTarget target = client.target(url);

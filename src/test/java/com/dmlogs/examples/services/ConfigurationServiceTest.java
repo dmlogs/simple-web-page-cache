@@ -54,4 +54,10 @@ public class ConfigurationServiceTest {
         configurationService.configure(new String[] { "updateCacheInterval=5" });
         assertEquals(5,configurationService.getUpdateCacheInterval());
     }
+
+    @Test
+    public void testConfigurePort() {
+        configurationService.configure(new String[] { "port=8888"});
+        assertEquals(8888,configurationService.getPort());
+    }
 }

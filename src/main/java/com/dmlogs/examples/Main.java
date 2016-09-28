@@ -7,7 +7,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import java.io.IOException;
 import java.net.URI;
-import java.text.NumberFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,7 +17,8 @@ import java.util.logging.Logger;
  */
 public class Main {
     // Base URI the Grizzly HTTP server will listen on
-    public static final String BASE_URI = "http://localhost:8080/";
+    public static String BASE_URI = null;
+    public static ConfigurationService config = null;
 
     /**
      * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.
@@ -40,13 +40,17 @@ public class Main {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
+        config = ConfigurationService.getInstance();
+
         try {
-            ConfigurationService.getInstance().configure(args);
+            config.configure(args);
         } catch(NumberFormatException nfe) {
             Logger.getLogger(Main.class.getSimpleName()).log(Level.SEVERE, nfe.getMessage(), nfe);
             System.out.println("Failed to parse arguments to configuration. Terminating...");
             return;
         }
+
+        BASE_URI = String.format("http://localhost:%d/",config.getPort());
 
         final HttpServer server = startServer();
         System.out.println(String.format("Jersey app started with WADL available at "

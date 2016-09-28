@@ -119,9 +119,9 @@ public class CacheService<T extends CacheItemModel> {
     /**
      * This method retrieves an item from the cache if
      * it exists based on the provided unique identifier.
-     * <p>
-     * Note: At this time not implementing an update
-     * to TTL/cache position on item access.
+     *
+     * Note: At this time not implementing an update to TTL/cache position on item access.
+     * Caching expires based on initial created timestamp.
      *
      * @param key Unique identifier for the item being retrieved.
      * @return The corresponding item in the cache if it exists, else null.

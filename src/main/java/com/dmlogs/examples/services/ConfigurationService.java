@@ -64,6 +64,17 @@ public class ConfigurationService {
         return 30000;
     }
 
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    private int port = 8080;
+
+
     private Logger logger = Logger.getLogger(ConfigurationService.class.getSimpleName());
 
     public void configure(String[] args) throws NumberFormatException {
@@ -84,6 +95,9 @@ public class ConfigurationService {
                         setUpdateCacheInterval(Long.parseLong(values[1]));
                         logger.log(Level.INFO, "updateCacheInterval set to " + values[1]);
                         break;
+                    case "port":
+                        setPort(Integer.parseInt(values[1]));
+                        logger.log(Level.INFO, "port set to " + values[1]);
                     default: break;
                 }
             }

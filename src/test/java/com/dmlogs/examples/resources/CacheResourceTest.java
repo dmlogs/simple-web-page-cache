@@ -27,6 +27,8 @@ public class CacheResourceTest {
 
     @Before
     public void setUp() throws Exception {
+        Main.BASE_URI = "http://localhost:8080";
+
         // start the server
         server = Main.startServer();
         // create the client

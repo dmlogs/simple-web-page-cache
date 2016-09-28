@@ -32,6 +32,7 @@ Command line arguments must be formatted 'key=value'.
 - **maxCacheSize**: The maximum number of items to store in the cache. (Default = 0; no limit)
 - **ttl**: Time to live in milliseconds. Cache records expire after TTL. This is controlled by a cleanup process which executes on interval. (Default = 0; infinite)
 - **updateCacheInterval**: The frequency at which the cleanup process will run in milliseconds. The cleanup process only executes if TTL is set to value other than 0. (Default = 30000; 30 seconds.)
+- **port**: The port to reserve for the Grizzly HttpServer.  (Default = 8080)
 
 Example:
 
