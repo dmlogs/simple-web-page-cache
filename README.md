@@ -33,6 +33,9 @@ Command line arguments must be formatted 'key=value'.
 - **ttl**: Time to live in milliseconds. Cache records expire after TTL. This is controlled by a cleanup process which executes on interval. (Default = 0; infinite)
 - **updateCacheInterval**: The frequency at which the cleanup process will run in milliseconds. The cleanup process only executes if TTL is set to value other than 0. (Default = 30000; 30 seconds.)
 - **port**: The port to reserve for the Grizzly HttpServer.  (Default = 8080)
+- **authenticationEnabled**: Enabled authentication. The api will expect Authorization header. (Default = false)
+- **user**: String to assert the proper user is authenticating. (Default = "user")
+- **password**: String to assert the proper password is provided. (Default = "password")
 
 Example:
 
@@ -68,6 +71,19 @@ WADL Definition is provided after start up via /application.wadl
   - Response Media-Type: text/html
 
   Given an ID returns the content that is associated with the ID as an appropriate response with the original body and headers.
+
+## Authentication
+
+If authentication is enabled the service will filter requests to assert any request not to the "application.wadl" path is authorized.
+
+Authentication expects a basic authorization header containing "[user]:[password]" Base64 encoded.
+
+Example:
+```
+# Where 'dXNlcjpwYXNzd29yZA==' is "user:password" Base64 encoded.
+Authorization: Basic dXNlcjpwYXNzd29yZA==
+```
+
 
 ## Caching and Persistant Storage
 

@@ -4,8 +4,10 @@ import com.dmlogs.examples.models.GetResponseModel;
 import com.dmlogs.examples.services.CacheService;
 import org.apache.commons.validator.routines.UrlValidator;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 import java.util.UUID;
 
 /**
@@ -41,7 +43,8 @@ public class CacheResource {
      */
     @GET
     @Produces(MediaType.TEXT_HTML)
-    public String cacheStats() {
+    public String cacheStats(@Context SecurityContext sc) {
+
         return String.format(cacheStatsTemplate, cacheService.getHitCount(), cacheService.getRequestCount(), cacheService.getHitRate());
     }
 

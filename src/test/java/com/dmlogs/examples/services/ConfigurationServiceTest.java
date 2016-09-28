@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ConfigurationServiceTest {
 
@@ -59,5 +60,23 @@ public class ConfigurationServiceTest {
     public void testConfigurePort() {
         configurationService.configure(new String[] { "port=8888"});
         assertEquals(8888,configurationService.getPort());
+    }
+
+    @Test
+    public void testConfigureAuthenticationEnabled() {
+        configurationService.configure(new String[] { "authenticationEnabled=true"});
+        assertTrue(configurationService.isAuthenticationEnabled());
+    }
+
+    @Test
+    public void testConfigureUser(){
+        configurationService.configure(new String[] { "user=admin"});
+        assertEquals("admin",configurationService.getUser());
+    }
+
+    @Test
+    public void testConfigurePassword() {
+        configurationService.configure(new String[] { "password=other"});
+        assertEquals("other",configurationService.getPassword());
     }
 }
