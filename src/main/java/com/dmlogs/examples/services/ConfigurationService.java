@@ -129,15 +129,19 @@ public class ConfigurationService {
                     case "port":
                         setPort(Integer.parseInt(values[1]));
                         logger.log(Level.INFO, "port set to " + values[1]);
+                        break;
                     case "authenticationEnabled":
                         setAuthenticationEnabled(Boolean.parseBoolean(values[1]));
                         logger.log(Level.INFO, "authenticationEnabled set to " + values[1]);
+                        break;
                     case "user":
                         setUser(values[1]);
                         logger.log(Level.INFO, "user set to " + values[1]);
+                        break;
                     case "password":
                         setPassword(values[1]);
                         logger.log(Level.INFO, "password set to " + values[1]);
+                        break;
                     default: break;
                 }
             }
