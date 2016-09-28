@@ -75,6 +75,37 @@ public class ConfigurationService {
     private int port = 8080;
 
 
+    public boolean isAuthenticationEnabled() {
+        return authenticationEnabled;
+    }
+
+    public void setAuthenticationEnabled(boolean authenticationEnabled) {
+        this.authenticationEnabled = authenticationEnabled;
+    }
+
+    private boolean authenticationEnabled = false;
+
+
+    private String user = "user";
+
+    private String password = "password";
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     private Logger logger = Logger.getLogger(ConfigurationService.class.getSimpleName());
 
     public void configure(String[] args) throws NumberFormatException {
@@ -98,6 +129,15 @@ public class ConfigurationService {
                     case "port":
                         setPort(Integer.parseInt(values[1]));
                         logger.log(Level.INFO, "port set to " + values[1]);
+                    case "authenticationEnabled":
+                        setAuthenticationEnabled(Boolean.parseBoolean(values[1]));
+                        logger.log(Level.INFO, "authenticationEnabled set to " + values[1]);
+                    case "user":
+                        setUser(values[1]);
+                        logger.log(Level.INFO, "user set to " + values[1]);
+                    case "password":
+                        setPassword(values[1]);
+                        logger.log(Level.INFO, "password set to " + values[1]);
                     default: break;
                 }
             }

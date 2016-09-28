@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class Main {
     // Base URI the Grizzly HTTP server will listen on
     public static String BASE_URI = null;
-    public static ConfigurationService config = null;
+    public static ConfigurationService config = ConfigurationService.getInstance();;
 
     /**
      * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.
@@ -28,6 +28,10 @@ public class Main {
         // create a resource config that scans for JAX-RS resources and providers
         // in com.dmlogs.examples package
         final ResourceConfig rc = new ResourceConfig().packages("com.dmlogs.examples.resources");
+
+        if (config.isAuthenticationEnabled()) {
+            rc.register(com.dmlogs.examples.AuthenticationRequestFilter.class);
+        }
 
         // create and start a new instance of grizzly http server
         // exposing the Jersey application at BASE_URI
@@ -40,7 +44,6 @@ public class Main {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        config = ConfigurationService.getInstance();
 
         try {
             config.configure(args);
@@ -58,5 +61,7 @@ public class Main {
         System.in.read();
         server.stop();
     }
+
+
 }
 
